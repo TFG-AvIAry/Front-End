@@ -26,6 +26,8 @@ function App() {
 
   const [iaData2, setIaData2] = useState(null);
 
+  const [iaData3, setIaData3] = useState(null);
+
   const [backData, setBackData] = useState(null);
 
 
@@ -34,7 +36,7 @@ function App() {
 
     new PureCounter('.purecounter');
 
-    axios.get("http://localhost:8080/birds/get")
+    axios.get("https://aviary-backend.onrender.com/birds/get")
       .then(response => {
         // Aquí puedes trabajar con los datos recibidos, por ejemplo, mostrarlos en la página web
         console.log('datossssssss', response.data);
@@ -115,9 +117,9 @@ function App() {
     <>
 
       <Nav />
-      <Hero dataFromIa={iaData} dataFromIa2={iaData2} backData={backData}/>
+      <Hero dataFromIa={iaData} dataFromIa2={iaData2} dataFromIa3={iaData3} backData={backData}/>
       <About />
-      <Ia onDataUpdate={setIaData} onDataUpdate2={setIaData2} backData={backData}/>
+      <Ia onDataUpdate={setIaData} onDataUpdate2={setIaData2} onDataUpdate3={setIaData3} backData={backData}/>
       <Features />
       <CutImage />
       <Team />

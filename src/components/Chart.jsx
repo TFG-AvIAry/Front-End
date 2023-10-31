@@ -17,11 +17,6 @@ export const Chart = ({ classificationResults }) => {
             name: result.class,
             max: 10,
         }));
-
-        const seriesData = [
-            
-        ];
-
         const option = {
             legend: {
                 data: classificationResults.map(result => result.class),

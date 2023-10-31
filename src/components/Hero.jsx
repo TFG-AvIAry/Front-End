@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Confetti from "react-confetti";
 import { Card } from './Card';
 
-export const Hero = ({ dataFromIa, dataFromIa2, backData }) => {
+export const Hero = ({ dataFromIa, dataFromIa2, dataFromIa3, backData }) => {
     const [inputValue, setInputValue] = useState(dataFromIa);
     const [searchTerm, setSearchTerm] = useState('');
     const [showConfetti, setShowConfetti] = useState(false);
@@ -116,8 +116,10 @@ export const Hero = ({ dataFromIa, dataFromIa2, backData }) => {
                             </div>
                         </div>
                         <div className="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-                            <Card dataFromIa={dataFromIa} dataFromIa2={dataFromIa2} filteredList={filteredList} handleClean={handleClean} backData={backData} />
+                            <Card dataFromIa={dataFromIa} dataFromIa2={dataFromIa2} dataFromIa3={dataFromIa3} filteredList={filteredList} handleClean={handleClean} backData={backData} />
                         </div>
+                        
+
                     </div>
                     {showConfetti && (
                         <Confetti numberOfPieces={150} width={width} height={height} />

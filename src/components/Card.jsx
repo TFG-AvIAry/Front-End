@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import '../assets/css/card.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import arrowUp from '../assets/img/arrow-up.png';
 import arrowDown from '../assets/img/arrow-down.png';
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFDocument } from "./PDFDocument";
 
 const angle = 20;
 
@@ -15,7 +18,7 @@ const remap = (value, oldMax, newMax) => {
 };
 
 
-export const Card = ({ dataFromIa2, filteredList, handleClean, backData }) => {
+export const Card = ({ dataFromIa2, dataFromIa3, filteredList, handleClean, backData }) => {
 
 
 
@@ -202,28 +205,28 @@ export const Card = ({ dataFromIa2, filteredList, handleClean, backData }) => {
                                     <div className="glass">
                                         <div className="row">
                                             <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
-                                                <h5>{datosMostrados ? datosMostrados.habitat: ''} </h5>
+                                                <h5>{datosMostrados ? datosMostrados.habitat : ''} </h5>
                                             </div>
                                             <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
-                                                <h5>{datosMostrados ? datosMostrados.colores: ''} </h5>
-                                            </div>
-
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
-                                                <h5>{datosMostrados ? datosMostrados.esperanza_de_vida: ''}</h5>
-                                            </div>
-                                            <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
-                                                <h5>{datosMostrados ? datosMostrados.alimentación: ''}</h5>
+                                                <h5>{datosMostrados ? datosMostrados.colores : ''} </h5>
                                             </div>
 
                                         </div>
                                         <div className="row">
                                             <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
-                                                <h5>{datosMostrados ? datosMostrados.tamaño: ''}</h5>
+                                                <h5>{datosMostrados ? datosMostrados.esperanza_de_vida : ''}</h5>
                                             </div>
                                             <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
-                                                <h5>{datosMostrados ? datosMostrados.peso: ''}</h5>
+                                                <h5>{datosMostrados ? datosMostrados.alimentación : ''}</h5>
+                                            </div>
+
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
+                                                <h5>{datosMostrados ? datosMostrados.tamaño : ''}</h5>
+                                            </div>
+                                            <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
+                                                <h5>{datosMostrados ? datosMostrados.peso : ''}</h5>
                                             </div>
 
                                         </div>
@@ -257,6 +260,15 @@ export const Card = ({ dataFromIa2, filteredList, handleClean, backData }) => {
                     <img src={arrowDown} alt="" />
                 </button>
             </div>
+
+            {dataFromIa2 && (
+                <PDFDownloadLink
+                    document={<PDFDocument datosMostrados={datosMostrados} dataFromIa3={dataFromIa3} />}
+                    fileName={datosMostrados ? `aviary-app_${datosMostrados.name}_predictions.pdf` : 'default.pdf'}
+                >
+                    <button className="btn btn-warning" id="boton-pdf">Download PDF with all Info</button>
+                </PDFDownloadLink>
+            )}
 
         </>
 

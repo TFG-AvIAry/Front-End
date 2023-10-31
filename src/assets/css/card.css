@@ -141,6 +141,13 @@
   filter: brightness(0.7); 
 }
 
+#boton-pdf {
+  margin-left: 18%;
+  margin-bottom: 20px;
+  margin-top: -10px;
+  color: #ffffff;
+}
+
 @media (min-width: 1080px) {
 
   .smallButton2 {

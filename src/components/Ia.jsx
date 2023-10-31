@@ -9,7 +9,7 @@ import { Chart } from './Chart';
 
 
 
-export const Ia = ({ onDataUpdate, onDataUpdate2, backData}) => {
+export const Ia = ({ onDataUpdate, onDataUpdate2, onDataUpdate3, backData}) => {
 
   const [data, setData] = useState('');
   const [classificationResults, setClassificationResults] = useState([]);
@@ -28,7 +28,7 @@ export const Ia = ({ onDataUpdate, onDataUpdate2, backData}) => {
     const formData = new FormData();
     formData.append('image', image);
 
-    axios.post('http://127.0.0.1:5000/upload', formData).then((res) => {
+    axios.post('https://aviary-ia.onrender.com/upload', formData).then((res) => {
       console.log('res', res);
       console.log('resdata', res.data);
       console.log('resclass', res.data[0].class);
@@ -78,7 +78,11 @@ export const Ia = ({ onDataUpdate, onDataUpdate2, backData}) => {
   const speciesDataFound = speciesNameToFind ? buscarEspeciePorNombre(speciesNameToFind) : null;
   console.log('especie encontradaIa', speciesDataFound);
   onDataUpdate2(speciesDataFound);
+  onDataUpdate3(classificationResults);
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   return (
 
@@ -123,9 +127,10 @@ export const Ia = ({ onDataUpdate, onDataUpdate2, backData}) => {
             </div>
             <input type="file" id="fileInput" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
             <button className="get-a-quote" id="our-features" onClick={() => document.getElementById('fileInput').click()}>Select Image</button>
-            <button className="get-a-quote" id="our-features">Refresh Tab</button>
+            <button className="get-a-quote" id="our-features" onClick={refreshPage}>Refresh Tab</button>
             <button className="get-a-quote" id="our-features" onClick={handleSendImage}>Send Image</button>
 
+            {data && (
             <div>
               <h1>Classification analysis</h1>
               {classificationResults.map((result, index) => (
@@ -134,7 +139,7 @@ export const Ia = ({ onDataUpdate, onDataUpdate2, backData}) => {
                   <p>Confidence: {((result.confidence / totalConfidenceOfTop5(classificationResults)) * 100).toFixed(2)}%</p>
                 </div>
               ))}
-            </div>
+            </div> )}
           </div>
 
 
@@ -166,6 +171,7 @@ export const Ia = ({ onDataUpdate, onDataUpdate2, backData}) => {
             </ul>
           </div>
         </div>
+        {data && (
         <div className="row gy-4">
 
           <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
@@ -178,6 +184,7 @@ export const Ia = ({ onDataUpdate, onDataUpdate2, backData}) => {
 
 
         </div>
+        )}
       </div>
 
     </section>
